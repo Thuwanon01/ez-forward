@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>สาย Software Engineer ที่ทำได้จริง</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-1: #f6f2ed;
+      --bg-2: #e7e0d7;
+      --ink: #111111;
+      --ink-soft: #2a2a2a;
+      --muted: #5c5c5c;
+      --brown: #6b4e2e;
+      --brown-dark: #3e2b1a;
+      --line: rgba(17, 17, 17, 0.12);
+      --card: #fbf8f4;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans Thai", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(165deg, var(--bg-1), var(--bg-2));
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 24px 88px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 0 28px;
+    }
+
+    .brand {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--brown-dark);
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    nav a {
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    nav a:hover {
+      border-bottom-color: var(--brown);
+    }
+
+    .hero {
+      display: grid;
+      gap: 26px;
+      padding: 40px 0 44px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+      color: var(--brown);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Noto Serif Thai", "Times New Roman", serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      max-width: 620px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: 1px solid var(--brown-dark);
+      background: var(--brown-dark);
+      color: #f8f3ee;
+      box-shadow: 0 8px 18px rgba(62, 43, 26, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(62, 43, 26, 0.22);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--brown-dark);
+      border-color: var(--brown);
+      box-shadow: none;
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 360px;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-family: "Noto Serif Thai", serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+      margin: 0 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(17, 17, 17, 0.1);
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    li::before {
+      content: "•";
+      color: var(--brown);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .path {
+      font-size: 1.04rem;
+      color: var(--ink-soft);
+      line-height: 1.9;
+    }
+
+    .closing {
+      text-align: center;
+      padding: 64px 0 28px;
+    }
+
+    .closing h2 {
+      font-family: "Noto Serif Thai", serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      margin: 0 0 18px;
+    }
+
+    .closing p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        gap: 10px;
+      }
+
+      .hero {
+        padding-top: 16px;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="reveal">
+      <div class="brand">คอร์ส Software Engineer</div>
+      <nav>
+        <a href="#hero">ภาพรวม</a>
+        <a href="#problems">ปัญหา</a>
+        <a href="#method">วิธีเรียน</a>
+        <a href="#benefits">สิ่งที่ได้</a>
+        <a href="#path">เส้นทาง</a>
+        <a href="#intake">การเปิดรับ</a>
+      </nav>
+    </header>
+
+    <section id="hero" class="hero reveal">
+      <div class="eyebrow">คอร์สสาย Software Engineer</div>
+      <h1>ได้งานที่ 2 สาย Software Engineer</h1>
+      <p>
+        เขียนโปรแกรมเองได้จริง<br />
+        ต่อยอดได้แม้ในยุค AI<br />
+        เรียนพื้นฐานให้เข้าใจจริง<br />
+        ฝึกทำงานแบบที่ใช้ในงานจริง<br />
+        มีโปรเจคให้ทำต่อเนื่อง เอาไปโชว์เป็นผลงานได้
+      </p>
+      <div class="hero-cta">
+        <a class="btn" href="#intake">ดูรอบเปิดรับ</a>
+        <a class="btn secondary" href="#method">เริ่มต้นจากระบบ</a>
+        <span class="meta">เหมาะกับคนที่อยากลงมือทำจริง ไม่ใช่แค่ดูผ่าน ๆ</span>
+      </div>
+    </section>
+
+    <section id="problems" class="reveal">
+      <div class="section-title">ปัญหาที่เจอบ่อย</div>
+      <div class="grid two">
+        <div class="card">
+          <ul>
+            <li>เรียนแล้วไม่รู้จะทำอะไรต่อ</li>
+            <li>ดูตามได้ แต่ยังคิดโจทย์เองไม่ออก</li>
+            <li>ทำได้ช่วงสั้น ๆ แล้วหยุด</li>
+            <li>ไม่รู้ขั้นตอนที่ใช้ในงานจริง</li>
+            <li>เลยไม่มั่นใจที่จะขยับไปอีกขั้น</li>
+          </ul>
+        </div>
+        <div class="card path">
+          หลายคนติดที่ “ไม่เห็นเส้นทาง” และ “ไม่มีระบบ” ทำให้ขาดความต่อเนื่อง
+          เราจัดโครงให้ครบ ทั้งพื้นฐาน แบบฝึกหัด และโปรเจค เพื่อให้เดินต่อได้จริง
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="reveal">
+      <div class="section-title">วิธีที่คอร์สนี้ใช้</div>
+      <div class="grid two">
+        <div class="card">
+          <ul>
+            <li>ไม่เน้นดูยาว ๆ แต่เน้น “ทำ”</li>
+            <li>เรียนพื้นฐานให้เข้าใจ</li>
+            <li>ทำแบบฝึกหัดทันที</li>
+            <li>ต่อด้วยโปรเจคจริง</li>
+            <li>ทำต่อเนื่องเป็นลำดับ</li>
+            <li>ทุกอย่างเรียงไว้แล้ว ไม่ต้องเดาว่าควรทำอะไรต่อ</li>
+          </ul>
+        </div>
+        <div class="card">
+          ระบบถูกวางเป็นขั้น ๆ เพื่อให้เกิดความต่อเนื่อง
+          โฟกัสที่งานจริง ไม่ใช่แค่ทฤษฎี
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits" class="reveal">
+      <div class="section-title">สิ่งที่ได้จากคอร์สนี้</div>
+      <div class="card">
+        <ul>
+          <li>เข้าใจโครงสร้างของโปรแกรมจริง ๆ</li>
+          <li>เขียนโปรแกรมเองได้ ไม่ต้องลอก</li>
+          <li>รู้ขั้นตอนทำงานแบบทีม Software</li>
+          <li>มีโปรเจคใส่ Portfolio ได้</li>
+          <li>รู้ว่าควรพัฒนาต่อทางไหน</li>
+          <li>พื้นฐานแน่น เรียนภาษาใหม่ หรือใช้เครื่องมือใหม่ได้เร็วขึ้น</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="path" class="reveal">
+      <div class="section-title">เส้นทางหลังเรียนจบ</div>
+      <div class="grid two">
+        <div class="card path">
+          เมื่อทำครบตามระบบ จะมีงานให้โชว์ และมีทักษะพอสำหรับต่อยอดสาย Software
+          เรียนรู้เองต่อได้ ไม่ได้จบแค่คอร์ส แต่ต่อเส้นทางได้เอง
+        </div>
+        <div class="card">
+          <ul>
+            <li>โปรเจคชัดเจน พร้อมเล่าและนำเสนอ</li>
+            <li>เข้าใจกระบวนการงานจริง ตั้งแต่วิเคราะห์ถึงส่งมอบ</li>
+            <li>มีแผนต่อยอดระยะยาวแบบเป็นระบบ</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="intake" class="reveal">
+      <div class="section-title">รูปแบบการเปิดรับ</div>
+      <div class="card">
+        เปิดเป็นรุ่น เพื่อดูแลการบ้านและโปรเจคอย่างใกล้ชิด<br />
+        รับจำนวนจำกัด ครบแล้วปิดรับ
+      </div>
+    </section>
+
+    <section class="closing reveal" id="closing">
+      <h2>ถ้าอยากได้มากกว่า “ดูแล้วจบ” แต่ต้องการ “ทำจนเป็น”</h2>
+      <p>นี่คือจุดเริ่มต้นที่พาไปต่อได้จริงในสาย Software Engineer</p>
+      <div class="hero-cta" style="justify-content: center;">
+        <a class="btn" href="#intake">จองสิทธิ์ในรุ่นถัดไป</a>
+        <a class="btn secondary" href="#hero">ดูภาพรวมอีกครั้ง</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      el.style.transitionDelay = `${index * 80}ms`;
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
