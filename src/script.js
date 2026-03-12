@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
 import fontJson from 'three/examples/fonts/helvetiker_regular.typeface.json'
 import * as CANNON from 'cannon-es'
 
@@ -145,7 +146,7 @@ const sceneThemes = {
         fogColor: '#060818',
         fogNear: 45,
         fogFar: 180,
-        starsVisible: true,
+        starsVisible: false,
         starsColor: '#dbe8ff',
         starsSize: 0.25,
         ambientIntensity: 1.2,
@@ -185,11 +186,18 @@ const sceneThemes = {
 }
 
 let currentSceneId = 1
+let sceneOneHdriTexture = null
 const applySceneTheme = (sceneId) => {
     const theme = sceneThemes[sceneId]
     if (!theme) return
 
-    scene.background = new THREE.Color(theme.background)
+    if (sceneId === 1 && sceneOneHdriTexture) {
+        scene.background = sceneOneHdriTexture
+        scene.environment = sceneOneHdriTexture
+    } else {
+        scene.background = new THREE.Color(theme.background)
+        scene.environment = null
+    }
     scene.fog = new THREE.Fog(theme.fogColor, theme.fogNear, theme.fogFar)
     stars.visible = theme.starsVisible
     starsMaterial.color.set(theme.starsColor)
@@ -346,19 +354,31 @@ window.addEventListener('resize', () => {
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000)
-camera.position.set(0, 14, 30)
-camera.lookAt(0, playerY, 0)
+camera.position.set(playerStartX, 12, playerStartZ + 22)
+camera.lookAt(playerStartX, playerY, playerStartZ)
 scene.add(camera)
 
-// Controls (orbit view)
+// Orbit camera that follows airplane like open-world games
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
-controls.target.set(0, playerY, 0)
+controls.target.set(playerStartX, playerY, playerStartZ)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: canvas })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+// HDRI environment for Scene 1
+const rgbeLoader = new RGBELoader()
+const hdriUrl = `${import.meta.env.BASE_URL}hdri/ludwikowice_farmland_4k.hdr`
+rgbeLoader.load(hdriUrl, (hdriTexture) => {
+    hdriTexture.mapping = THREE.EquirectangularReflectionMapping
+    sceneOneHdriTexture = hdriTexture
+
+    if (currentSceneId === 1) {
+        applySceneTheme(1)
+    }
+})
 
 // Animate
 const clock = new THREE.Clock()
